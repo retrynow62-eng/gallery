@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h2= comic.title
+  if comic.description
+    p= comic.description
+  .viewer
+    each page, i in pages
+      img.viewer-page(src=page.filename alt=`page ${i+1}`)
+  form(method="post" action="/admin/delete")
+    input(type="hidden" name="id" value=comic.id)
+    input(type="password" name="token" placeholder="Admin token")
+    button(type="submit") Delete (admin)
