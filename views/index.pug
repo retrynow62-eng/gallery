@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .gallery
+    each comic in comics
+      .card
+        a(href=`/comic/${comic.id}`)
+          if fs = true
+            img(src=`/uploads/thumbs/${comic.id}.jpg` alt=comic.title)
+          else
+            img(src="/public/placeholder.png")
+        h3= comic.title
+        p= new Date(comic.created_at).toLocaleString()
+  if total > per
+    .pagination
+      if page > 1
+        a(href=`/?page=${page-1}`) Prev
+      span Page #{page}
+      if page * per < total
+        a(href=`/?page=${page+1}`) Next
